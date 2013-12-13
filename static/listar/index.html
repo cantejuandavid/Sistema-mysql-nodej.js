@@ -1,0 +1,339 @@
+<<<<<<< HEAD
+<!doctype html>
+<html lang="es">
+<head>
+	<title>Listar</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+	<link rel="shortcut icon" href="../img/iconos.png">	
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="../Librerias/paginador/css/demo_table.css" rel="stylesheet" type="text/css">  
+
+    <script src="../Librerias/jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../Librerias/bootstrap/js/bootstrap.js"></script>
+    <script src="../Librerias/apprise/apprise-1.5.full.js"></script>
+    <script src="script.js"></script>
+    <script src="../Librerias/paginador/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<!-- Marcar y alternar para agrupar y obtener una mejor visualización en dispositivos móbiles -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Sistema de Usuario</a>
+		</div>
+
+		<!-- Recoge los enlaces de navegación, formularios, y otros contenidos alternados -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="../">Inicio</a></li>
+				<li><a href="../lobby">Lobby</a></li>
+				<li><a href="../registro">Registro</a></li>
+				<li><a href="../consulta">Consulta</a></li>
+				<li class="active"><a href="../listar">Listar</a></li>				
+				<li><a href="../App">App</a></li>	
+				<li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li id="nameUser"><a href="#">Usuario</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="../cuenta/">Mi cuenta</a></li>
+						<li id="liMetas"><a href="../metas/">Metas</a></li>						
+						<li class="divider" id="divider"></li>
+						<li id="logout"><a href="#">Cerra sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<section class="container well">
+		<div class="row-fluid">
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active"><a href="#containerSegSocial">Seguridad social</a></li>
+				<li><a href="#containerCargo">Cargo</a></li>
+				<li><a href="#containerEmpleado">Empleado</a></li>
+				<li><a href="#containerEmpresaVin">Vínculo Empresa</a></li>
+				<li><a href="#containerNombre">Nombre</a></li>				
+			</ul>
+
+			<div class="tab-content">
+				<!--BUSQUEDA POR SEGURIDAD SOCIAL-->
+				<div class="tab-pane active" id="containerSegSocial">
+					<div class="row" id="containerSelectorsSS">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>EPS</h3>					
+							<select id="selectEPS" class="form-control input-sm" data-info="eps" disabled>
+								<option value="">Cargando...</option>					
+							</select>													
+						</div>
+						<div class="col-sm-4 hoverListarColum">
+							<h3>ARL</h3>
+							<select id="selectARL" class="form-control input-sm" data-info="arl" disabled>
+								<option value="">Cargando...</option>						
+							</select>							
+						</div>
+						<div class="col-sm-4 hoverListarColum">
+							<h3>AFP</h3>
+							<select id="selectAFP" class="form-control input-sm" data-info="afp" disabled disabled>
+								<option value="">Cargando...</option>						
+							</select>
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 containerTableSS" id="containerTableSS"></div>
+					</div>
+				</div>
+				<!--BUSQUEDO POR CARGO-->
+				<div class="tab-pane" id="containerCargo">
+					<div class="row" id="containerInputCargo">						
+						<div class="col-sm-4 hoverListarColum">
+							<h3>CARGO</h3>
+							<form id="form_cargo">
+								<div class="input-group">
+									<input type="text" class="form-control input-sm" id="inputTextCargo" placeholder="Ej: cocinero, vendedor, mesero..." autofocus>
+									<span class="input-group-btn">
+										<button class="btn btn-default btn-sm" type="submit">Buscar!</button>
+									</span>
+								</div>
+							</form>													
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12" id="containerTableCargo"></div>
+					</div>
+				</div>
+				<!-- BUSQUEDA POR EMPLEADOS-->
+				<div class="tab-pane" id="containerEmpleado">
+					<div class="row" id="containerSelectorEmpleado">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>EMPLEADO</h3>					
+							<select id="selectEmpleado" class="form-control input-sm" data-info="empleado" disabled>
+								<option value=""></option>					
+							</select>													
+						</div>						
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 containerTableSS" id="containerTableEmpleado"></div>
+					</div>
+				</div>
+				<!--BUSQUEDA POR EMPRESAVIN-->
+				<div class="tab-pane" id="containerEmpresaVin">
+					<div class="row" id="containerSelectorEmpresaVin">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>VÍNCULO DE EMPRESA</h3>					
+							<select id="selectEmpresaVin" class="form-control input-sm" data-info="empresaVin" disabled>
+								<option value=""></option>					
+							</select>													
+						</div>						
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 containerTableSS" id="containerTableEmpresaVin"></div>
+					</div>
+				</div>
+				<!--BUSQUEDA POR NOMBRE-->
+				<div class="tab-pane" id="containerNombre">
+					<div class="row" id="containerInputNombre">						
+						<div class="col-sm-4 hoverListarColum">
+							<h3>BUSQUEDA POR NOMBRE</h3>
+							<form id="form_nombre">
+								<div class="input-group">
+									<input type="text" class="form-control input-sm" id="inputTextNombre" placeholder="Ej: juan, carlos, jose..." autofocus>
+									<span class="input-group-btn">
+										<button class="btn btn-default btn-sm" type="submit">Buscar!</button>
+									</span>
+								</div>
+							</form>													
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12" id="containerTableNombre"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	
+</body>
+=======
+<!doctype html>
+<html lang="es">
+<head>
+	<title>Listar</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+	<link rel="shortcut icon" href="../img/iconos.png">
+	<link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css">
+    <link href="../Librerias/paginador/css/demo_table.css" rel="stylesheet" type="text/css">  
+
+    <script src="../Librerias/jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../Librerias/bootstrap/js/bootstrap.js"></script>
+    <script src="../Librerias/apprise/apprise-1.5.full.js"></script>
+    <script src="script.js"></script>
+    <script src="../Librerias/paginador/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<!-- Marcar y alternar para agrupar y obtener una mejor visualización en dispositivos móbiles -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Sistema de Usuario</a>
+		</div>
+
+		<!-- Recoge los enlaces de navegación, formularios, y otros contenidos alternados -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="../">Inicio</a></li>
+				<li><a href="../lobby">Lobby</a></li>
+				<li><a href="../registro">Registro</a></li>
+				<li><a href="../consulta">Consulta</a></li>
+				<li class="active"><a href="../listar">Listar</a></li>
+				<li><a href="../gestor">Gestor</a></li>
+				<li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li id="nameUser"><a href="#">Usuario</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="../cuenta/">Mi cuenta</a></li>
+						<li id="liMetas"><a href="../metas/">Metas</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider" id="divider"></li>
+						<li id="logout"><a href="#">Cerra sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<section class="container">
+		<div class="row-fluid">
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active"><a href="#containerSegSocial">Seguridad social</a></li>
+				<li><a href="#containerCargo">Cargo</a></li>
+				<li><a href="#containerEmpleado">Empleado</a></li>
+				<li><a href="#containerEmpresaVin">Vínculo Empresa</a></li>
+				<li><a href="#containerNombre">Nombre</a></li>				
+			</ul>
+
+			<div class="tab-content">
+				<!--BUSQUEDA POR SEGURIDAD SOCIAL-->
+				<div class="tab-pane active" id="containerSegSocial">
+					<div class="row" id="containerSelectorsSS">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>EPS</h3>					
+							<select id="selectEPS" class="form-control" data-info="eps" disabled>
+								<option value="">Cargando...</option>					
+							</select>													
+						</div>
+						<div class="col-sm-4 hoverListarColum">
+							<h3>ARL</h3>
+							<select id="selectARL" class="form-control" data-info="arl" disabled>
+								<option value="">Cargando...</option>						
+							</select>							
+						</div>
+						<div class="col-sm-4 hoverListarColum">
+							<h3>AFP</h3>
+							<select id="selectAFP" class="form-control" data-info="afp" disabled disabled>
+								<option value="">Cargando...</option>						
+							</select>
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 padding15px" id="containerTableSS"></div>
+					</div>
+				</div>
+				<!--BUSQUEDO POR CARGO-->
+				<div class="tab-pane" id="containerCargo">
+					<div class="row" id="containerInputCargo">						
+						<div class="col-sm-4 hoverListarColum">
+							<h3>CARGO</h3>
+							<form id="form_cargo">
+								<div class="input-group">
+									<input type="text" class="form-control" id="inputTextCargo" placeholder="Ej: cocinero, vendedor, mesero..." autofocus>
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">Buscar!</button>
+									</span>
+								</div>
+							</form>													
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12" id="containerTableCargo"></div>
+					</div>
+				</div>
+				<!-- BUSQUEDA POR EMPLEADOS-->
+				<div class="tab-pane" id="containerEmpleado">
+					<div class="row" id="containerSelectorEmpleado">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>EMPLEADO</h3>					
+							<select id="selectEmpleado" class="form-control" data-info="empleado" disabled>
+								<option value=""></option>					
+							</select>													
+						</div>						
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 padding15px" id="containerTableEmpleado"></div>
+					</div>
+				</div>
+				<!--BUSQUEDA POR EMPRESAVIN-->
+				<div class="tab-pane" id="containerEmpresaVin">
+					<div class="row" id="containerSelectorEmpresaVin">
+						<div class="col-sm-4 hoverListarColum">
+							<h3>VÍNCULO DE EMPRESA</h3>					
+							<select id="selectEmpresaVin" class="form-control" data-info="empresaVin" disabled>
+								<option value=""></option>					
+							</select>													
+						</div>						
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12 padding15px" id="containerTableEmpresaVin"></div>
+					</div>
+				</div>
+				<!--BUSQUEDA POR NOMBRE-->
+				<div class="tab-pane" id="containerNombre">
+					<div class="row" id="containerInputNombre">						
+						<div class="col-sm-4 hoverListarColum">
+							<h3>BUSQUEDA POR NOMBRE</h3>
+							<form id="form_nombre">
+								<div class="input-group">
+									<input type="text" class="form-control" id="inputTextNombre" placeholder="Ej: juan, carlos, jose..." autofocus>
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">Buscar!</button>
+									</span>
+								</div>
+							</form>													
+						</div>
+					</div>
+					<div class="row" style="color:#8D8D8D">
+						<div class="col-sm-12" id="containerTableNombre"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	
+</body>
+>>>>>>> 7666d55568f96ceff9e9b2fcb279a904e05a85a0
+</html>

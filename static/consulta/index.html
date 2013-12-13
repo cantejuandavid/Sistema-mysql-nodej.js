@@ -1,0 +1,589 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+    <title>Consulta al sistema</title>
+    <link rel="shortcut icon" href="../img/iconos.png">    
+    <link rel="stylesheet" href="../Librerias//bootstrap/css/bootstrap.css" >
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css"> 
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../Librerias//jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../Librerias//bootstrap/js/bootstrap.js"></script>
+    <script src="../Librerias//apprise/apprise-1.5.full.js"></script>
+    <script src="script.js"></script>
+    <script src="../Librerias/fn.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Sistema de Usuario</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../">Inicio</a></li>
+        <li><a href="../lobby">Lobby</a></li>
+        <li><a href="../registro">Registro</a></li>
+        <li class="active"><a href="../consulta">Consulta</a></li>
+        <li><a href="../listar">Listar</a></li>
+        <li><a href="../App">App</a></li> 
+        <li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="nameUser"><a href="#">Usuario</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="../cuenta/">Mi cuenta</a></li>
+            <li id="liMetas"><a href="../metas/">Metas</a></li>            
+            <li class="divider"></li>
+            <li id="logout"><a href="#">Cerra sesión</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  
+    
+  <section class="container well inverse-background">
+    <div class="overlay"></div>
+    <img src="img/generated-image.gif" class="loadConsulta">
+
+    <!-- formulario de contsulta -->
+    <div class="row text-center">
+      <div class="col-sm-3">
+        <div class="panel panel-inverse">
+          <div class="panel-heading text-left">Consulta al sistema</div>
+          <div class="panel-body">
+            <form id="form-consulta">
+              <input id="valorcedula" type="text" class="form-control" autofocus placeholder="Cédula" />              
+              <label for="estado" class="labelEstado">Incluir usuarios eliminados</label>
+              <input type="checkbox" id="estado">                          
+              <button class="btn btn-primary" type="submit" id="botonconsultar" data-loading-text="Loading..."><i class="glyphicon glyphicon-search"></i> Consultar</button>
+            </form>
+          </div>          
+        </div>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">Acción</div>
+          <div id="acciones" class="panel-body">
+            <button class="btn btn-primary btn-sm" id="editar"><i class="glyphicon glyphicon-edit"></i><span> Editar</span></button>
+            <button class="btn btn-danger btn-sm" id="eliminarUsu"><i class="glyphicon glyphicon-trash"></i><span> Eliminar</span></button>
+          </div>
+        </div>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">Estado</div>
+          <div id="acciones" class="panel-body">
+            <div class="h3"><span id="estadoC" class="label label-default"></span></div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="bloqueLeft" class="col-sm-6">
+       <div class="row">
+        <div class="col-sm-12">
+          <form id="resultForm">
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Datos Personales</a>
+                  </h3>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="row">                      
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control input-sm" id="nombre" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control input-sm" id="apellido" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control input-sm" id="telefono" readonly>                          
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" class="form-control input-sm" id="direccion" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-11">
+                          <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="text" class="form-control input-sm" id="correo" readonly>                            
+                          </div>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                      Datos de Afiliación
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="row">                      
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="eps">EPS</label>
+                            <input type="text" class="form-control input-sm" id="eps" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="arl">ARL</label>
+                            <input type="text" class="form-control input-sm" id="arl" readonly>                        
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="afp">AFP</label>
+                            <input type="text" class="form-control input-sm" id="afp" readonly>                            
+                          </div>
+                        </div>                      
+                        
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label for="caja">CAJA</label>
+                            <input type="text" class="form-control input-sm" id="caja" readonly>                          
+                          </div>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                      Datos Laborales
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="fechaIngreso">FECHA INGRESO</label>
+                            <input type="text" class="form-control input-sm" id="fechaIngreso" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="fechaRegistro">FECHA REGISTRO</label>
+                            <input type="text" class="form-control input-sm" id="fechaRegistro" readonly>                            
+                          </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" class="form-control input-sm" id="cargo" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label for="salario">Salario</label>
+                            <input type="text" class="form-control input-sm" id="salario" readonly>                           
+                          </div>
+                        </div>           
+
+                        <div class="col-sm-8">
+                          <div class="form-group">
+                            <label for="empresaVin">Empresa Vínculo</label>
+                            <input type="text" class="form-control h5 input-sm" id="empresaVin" readonly>                            
+                          </div>
+                        </div>                                              
+                      
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                      Datos de Planilla
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="usuarioPlanilla">Usuario</label>
+                            <input type="text" class="form-control input-sm" id="usuarioPlanilla" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="passPlanilla">Contraseña</label>
+                            <input type="text" class="form-control input-sm" id="passPlanilla" readonly>                            
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> 
+       </div>
+       <div class="col-sm-3">
+        <div class="row">
+          <div class="col-sm-12">
+             <div class="panel panel-inverse">
+              <div class="panel-heading">Mensualidad</div>
+              <div id="acciones" class="panel-body">
+                <div class="h2 text-center"><span id="mensualidad"></span></div>
+              </div>
+            </div>
+            <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#registros">registros</a></li>
+              <li><a href="#imagenes">Imagenes</a></li>
+            </ul>
+
+            <div class="tab-content contentRegyImg">
+              <div class="tab-pane active" id="registros">
+                <ul id="listaRegistro" class="listaRegistros"></ul>
+              </div>
+              <div class="tab-pane" id="imagenes">
+                <ul id="listaImagenes" class="listaImagenes"></ul>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+    <title>Consulta al sistema</title>
+    <link rel="shortcut icon" href="../img/iconos.png">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../Librerias//bootstrap/css/bootstrap.css" >
+    <link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css"> 
+
+    <script src="../Librerias//jquery/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../Librerias//bootstrap/js/bootstrap.js"></script>
+    <script src="../Librerias//apprise/apprise-1.5.full.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Sistema de Usuario</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../">Inicio</a></li>
+        <li><a href="../lobby">Lobby</a></li>
+        <li><a href="../registro">Registro</a></li>
+        <li class="active"><a href="../consulta">Consulta</a></li>
+        <li><a href="../listar">Listar</a></li>
+        <li><a href="../gestor">Gestor</a></li>
+        <li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="nameUser"><a href="#">Usuario</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="../cuenta/">Mi cuenta</a></li>
+            <li id="liMetas"><a href="../metas/">Metas</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li id="logout"><a href="#">Cerra sesión</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  
+    
+  <section class="container well inverse-background">
+    <div class="overlay"></div>
+    <img src="img/generated-image.gif" class="loadConsulta">
+
+    <!-- formulario de contsulta -->
+    <div class="row text-center">
+      <div class="col-sm-3">
+        <div class="panel panel-inverse">
+          <div class="panel-heading text-left">Consulta al sistema</div>
+          <div class="panel-body">
+            <form id="form-consulta">
+              <input id="valorcedula" type="text" class="form-control" autofocus placeholder="Cédula" />              
+              <label for="estado" class="labelEstado">Incluir usuarios eliminados</label>
+              <input type="checkbox" id="estado" class="checkEstado">
+              <label for="estado">Incluir usuarios eliminados</label>              
+              <button class="btn btn-primary" type="submit" id="botonconsultar" data-loading-text="Loading...">Consultar</button>
+            </form>
+          </div>          
+        </div>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">Acción</div>
+          <div id="acciones" class="panel-body">
+            <button class="btn btn-primary btn-sm" id="editar"><i class="glyphicon glyphicon-edit"></i><span> Editar</span></button>
+            <button class="btn btn-danger btn-sm" id="eliminarUsu"><i class="glyphicon glyphicon-trash"></i><span> Eliminar</span></button>
+          </div>
+        </div>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">Estado</div>
+          <div id="acciones" class="panel-body">
+            <div class="h3"><span id="estadoC" class="label label-default"></span></div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="bloqueLeft" class="col-sm-6">
+       <div class="row">
+        <div class="col-sm-12">
+          <form id="resultForm">
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Datos Personales</a>
+                  </h3>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="row">                      
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" readonly>                          
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" class="form-control" id="direccion" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-11">
+                          <div class="form-group">
+                            <label for="correo">Correo</label>
+                            <input type="text" class="form-control" id="correo" readonly>                            
+                          </div>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                      Datos de Afiliación
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="row">                      
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="eps">EPS</label>
+                            <input type="text" class="form-control" id="eps" readonly>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="arl">ARL</label>
+                            <input type="text" class="form-control" id="arl" readonly>                        
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="afp">AFP</label>
+                            <input type="text" class="form-control" id="afp" readonly>                            
+                          </div>
+                        </div>                      
+                        
+                        <div class="col-sm-2">
+                          <div class="form-group">
+                            <label for="caja">CAJA</label>
+                            <input type="text" class="form-control" id="caja" readonly>                          
+                          </div>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-inverse">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                      Datos Laborales
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="fechaIngreso">FECHA INGRESO</label>
+                            <input type="text" class="form-control" id="fechaIngreso" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="fechaRegistro">FECHA REGISTRO</label>
+                            <input type="text" class="form-control" id="fechaRegistro" readonly>                            
+                          </div>
+                        </div>
+                        
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" class="form-control" id="cargo" readonly>                           
+                          </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="form-group">
+                            <label for="salario">Salario</label>
+                            <input type="text" class="form-control" id="salario" readonly>                           
+                          </div>
+                        </div>           
+
+                        <div class="col-sm-8">
+                          <div class="form-group">
+                            <label for="empresaVin">Empresa Vínculo</label>
+                            <input type="text" class="form-control h5" id="empresaVin" readonly>                            
+                          </div>
+                        </div>                                              
+                      
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> 
+       </div>
+       <div class="col-sm-3">
+        <div class="row">
+          <div class="col-sm-12">
+             <div class="panel panel-inverse">
+              <div class="panel-heading">Mensualidad</div>
+              <div id="acciones" class="panel-body">
+                <div class="h2 text-center"><span id="mensualidad"></span></div>
+              </div>
+            </div>
+            <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#registros">registros</a></li>
+              <li><a href="#imagenes">Imagenes</a></li>
+            </ul>
+
+            <div class="tab-content contentRegyImg">
+              <div class="tab-pane active" id="registros">
+                <ul id="listaRegistro" class="listaRegistros"></ul>
+              </div>
+              <div class="tab-pane" id="imagenes">
+                <ul id="listaImagenes" class="listaImagenes"></ul>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+</html>
+>>>>>>> 7666d55568f96ceff9e9b2fcb279a904e05a85a0

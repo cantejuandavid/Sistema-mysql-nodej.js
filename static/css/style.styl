@@ -1,0 +1,329 @@
+box-shadow()
+  -ms-box-shadow arguments 
+  -moz-box-shadow arguments
+  -o-box-shadow arguments
+  -webkit-box-shadow arguments
+  box-shadow arguments
+
+border-radius()
+  -ms-border-radius arguments 
+  -moz-border-radius arguments
+  -o-border-radius arguments
+  -webkit-border-radius arguments
+  border-radius arguments
+
+transition()
+  -ms-transition arguments 
+  -moz-transition arguments
+  -o-transition arguments
+  -webkit-transition arguments
+  transition arguments
+
+.appriseOverlay
+  position fixed 
+  top 0 
+  left 0 
+  background rgba(0, 0, 0, 0.3) 
+  display none
+ 
+.appriseOuter
+  margin-top 120px 
+  background #eee 
+  border 1px solid #fff  
+  box-shadow(0px 3px 7px #333)  
+  border-radius(4px) 
+  position absolute 
+  z-index 99999999 
+  min-width 200px 
+  min-height 50px 
+  max-width 75% 
+  position fixed 
+  display none 
+  text-align  center 
+  font  normal normal 14px arial 
+ 
+.appriseInner
+  padding 20px 
+  color #333 
+  text-shadow 0px 1px 0px #fff
+ 
+.appriseInner button
+  border 1px solid #bbb 
+  border-radius(3px)
+  background  -moz-linear-gradient(100% 100% 90deg, #eee, #d5d5d5) 
+  background  -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#d5d5d5)) 
+  background  -webkit-linear-gradient(#eee, #d5d5d5) 
+  background  -o-linear-gradient(#eee, #d5d5d5) 
+  color #232d3d 
+  font-size 14px 
+  font-weight bold 
+  padding  9px 15px 
+  margin 0 3px 
+  text-shadow 0px 1px 0px #fff 
+  cursor pointer 
+  box-shadow(0px 1px 2px #ccc)
+ 
+.appriseInner button hover
+  color #d85054
+ 
+.aButtons, .aInput
+  margin 20px 10px 0px 10px 
+  text-align center
+ 
+.aTextbox
+  border 1px solid #aaa 
+  border-radius(4px)
+  box-shadow(0px 1px 0px #fff)
+  width 180px 
+  font-size 12px 
+  font-weight bold 
+  padding 5px 10px
+
+.avatar-s
+  vertical-align top
+  margin 0 5px 0 0
+  width 20px
+
+body
+  background-color #6A6363
+  padding-top 65px 
+  margin  0
+  overflow-x hidden 
+  overflow-y scroll
+ 
+.centralLogin
+  background #B3B3B3
+  min-height  20px
+  padding  19px
+  margin-bottom  20px
+  background-color  #f5f5f5
+  border  1px solid #e3e3e3
+  border-radius  4px
+
+  .welcomeUser
+    display none
+    text-align center
+    .avatar
+      margin-bottom 10px
+      width 100px
+
+  .form-reg
+    display none
+    fieldset
+      .load
+        display none
+.thumbImg
+  width 20px
+  display inline-block
+  vertical-align top
+  margin-right 3px
+
+.form-login  
+  .load
+    display none
+    margin 0 auto
+    width 30px
+    z-index 9999999
+
+.centralApp
+  background #777
+  border 1px solid #4B4B4B
+
+.divPrincEmpresa
+  background #FFFFFF  
+  border-left 5px solid #6CB4E8
+  cursor pointer
+  box-shadow(0 0 6px rgba(0,0,0,.3))
+  padding 10px
+  margin-bottom 5px
+  border-radius 0 7px 7px 0
+  &hover
+    background #E5E5E5
+    border-left-color orange    
+
+.crearEmpresa
+  background #fff
+  border 1px solid #E7E7E7
+  border-radius(5px)
+  padding 30px
+  fieldset
+    margin-bottom 10px
+
+.wrapSucesos  
+  border-radius 10px 0px 0 10px
+  height 300px
+  overflow-y scroll
+  overflow-x hidden
+  border 3px solid #4E4E4E
+  box-shadow(0 0 18px rgba(102, 175, 233, 0.8))
+  .lineSuceso
+    color #D4D4D4
+    border-bottom 1px solid #666666
+    padding 5px 5px 0 10px
+    text-align left
+    width 100%
+  .selectEmp
+    background-color #7D7D7D !important
+
+
+.tableListUsers
+  background #fff
+  margin 0 auto !important
+  font-size 12px
+  float none !important
+  td, th
+    padding 3px
+
+.containerErroresReg
+  display none
+
+.campoErrorReg
+  border 1px solid rgba(253,0,0,.5)
+  border-radius(4px)
+  box-shadow(0 0 5px rgba(253,0,0,.2))
+  color #555555    
+  resize none  
+  transition(.3s ease-in-out all)
+
+.text-bigg
+  font-size 40px
+  color #44CBD2
+  font-weight bold
+
+.tableSuccessReg
+  background #fff
+  text-align center
+
+.loadConsulta
+  position absolute
+  margin 10% 0 0 42%
+  display none
+  width 60px
+  height 60px
+  z-index 9999999
+
+.labelEstado
+  color #FF5C17
+  font normal normal 12px arial, sans-serif
+  display inline-block
+  line-height 12px
+  text-align left
+
+.checkEstado 
+  display none
+
+.checkEstado + label 
+  background #fff
+  display inline-block
+  width 16px
+  height 16px
+  background url(../consulta/img/check_02.png) 0px 0px no-repeat
+  text-indent -1000em
+  cursor pointer
+
+.checkEstadochecked + label 
+  background url(../consulta/img/check_02.png) 0px -16px no-repeat
+
+ul.listaRegistros
+  padding 0
+  list-style none
+  li
+    background #969696
+    color #fff
+    display block
+    font normal normal 14px arial, sans-serif
+    list-style none
+    line-height 14px
+    margin 2px
+    padding 3px
+    text-align left
+ul.listaImagenes
+  padding 0
+  list-style none
+  li
+    background #969696
+    color #fff
+    display block
+    font normal normal 14px arial, sans-serif
+    list-style none
+    line-height 14px
+    margin 2px
+    padding 3px
+    text-align left
+
+
+
+.tableClassUsu
+  background #fff !important
+  margin 0 auto !important
+  float none !important
+  td,th
+    word-wrap break-word
+  td:nth-child(2)
+    width 120px
+  td:nth-child(3)
+    width 150px
+  td:nth-child(4)
+    width 200px
+
+.containerTableSS
+  padding 15px
+
+.captionTableListar
+  color #636363
+
+ul.UserAndPasstoggle  
+  cursor pointer
+  list-style none
+  padding 0
+  text-align left
+  li    
+    font-size 12px
+    display none
+    padding 2px
+    text-align left
+    i
+      color #2C71A9
+
+div.msjPop
+  background rgba(0, 182, 0, 0.9)
+  box-shadow(0px 3px 2px rgba(0,0,0,.2))  
+  color #fff
+  font-weight bold
+  padding 10px
+  position absolute
+  top 50px
+  right -100%
+
+.contentMenCheck
+  div
+    display block
+
+.valorMenSpan
+  display block
+  padding 4px
+  font normal bold 24px arial
+  color #4A7E2C
+
+.infoEmpBloq  
+  background transparent
+  border 1px solid transparent
+  border-bottom-color #F8F8F8
+  outline none
+  color rgba(99,99,99,1)
+
+.infoEmpEdit  
+  background #fff
+
+.buttonEditarInfoEmp
+  position absolute
+  right 0
+  bottom 0
+  border 1px solid transparent
+  border-top-color #D2D2D2
+  border-left-color #D2D2D2
+  outline none
+  border-radius 0
+
+.contenInfoEmp
+  position relative

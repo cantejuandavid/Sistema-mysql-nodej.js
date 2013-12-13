@@ -1,0 +1,491 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+	<title>Registro de usuarios | Asopagos de Colombia S.A.S Aplicación</title>
+	<link rel="shortcut icon" href="../img/iconos.png">
+	<link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap.css" >	
+	<link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="../css/style.css">	
+	<link rel="stylesheet" href="../Librerias/calendario/css/calendar-blue.css">
+
+	<script src="../Librerias/calendario/js/calendar.js"></script>
+	<script src="../Librerias/calendario/js/calendar-es.js" ></script>
+	<script src="../Librerias/calendario/js/calendar-setup.js" ></script>
+	<script src="../Librerias/jquery/jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../Librerias/bootstrap/js/bootstrap.js"></script>
+    <script src="script.js"></script>
+    <script src="../Librerias/apprise/apprise-1.5.full.js"></script>
+    <script src="../librerias/fn.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Sistema de Usuario</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse navbar-ex1-collapse">
+	      <ul class="nav navbar-nav">
+	      	<li><a href="../">Inicio</a></li>
+	      	<li><a href="../lobby">Lobby</a></li>
+	        <li class="active"><a href="">Registro</a></li>
+	        <li><a href="../consulta">Consulta</a></li>
+	        <li><a href="../listar">Listar</a></li>	        
+	        <li><a href="../App">App</a></li>	
+			<li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li id="nameUser"><a href="#">Usuario</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="../cuenta/">Mi cuenta</a></li>
+	            <li id="liMetas"><a href="../metas/">Metas</a></li>	            
+	            <li class="divider"></li>
+	            <li id="logout"><a href="#">Cerra sesión</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </nav>
+	
+	<section class="container well">
+		
+		<form id="form-regUsu">
+			<h2 class="text-center text-blue">Registro de <b>Independientes</b></h2>
+			<div id="containerErrores" class="alert alert-danger containerErroresReg">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    	<div id="tContainerErrores"></div>
+		    	<div id="bContainerErrores"></div>
+		    </div>
+  			
+			<div class="row">
+				<div class="col-sm-8">
+					<fieldset>
+		  				<legend class="text-gris">Datos Personales</legend>    
+						
+			  			<div class="row">
+							<div class="col-sm-4">
+
+								<div class="form-group">    
+					        		<label id="labelCedula" for="cedula">Cédula</label>
+				        			<input type="text" class="form-control input-sm" data-tag="Cédula" id="cedula" maxlength="12" onkeyup="ValidarCedula(this.value)" onkeypress="return EscribeSoloNumero(event,'mensaje1')" autocomplete= "off" tabindex="1" autofocus/>
+				    			</div>				    			
+								<div class="form-group">
+					        		<label for="direccion">Dirección</label>
+					    			<input type="text" id="direccion" data-tag="Direccion" class="form-control input-sm" tabindex="4" />		    		
+					      		</div>
+							</div>
+		  					<div class="col-sm-4">
+		  						<div class="form-group">    
+					         		<label for="nombre">Nombre</label>	         		
+					         		<input type="text" id="nombre" data-tag="Nombre" data-toggle="tooltip" title="asdasd" class="form-control input-sm" onkeypress="return soloLetras(event)" tabindex="2" />	         
+					      		</div>
+					      		<label for="telefono">Teléfono</label>	
+					      		<div class="input-group form-group">    					        		
+					        		<span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>       		
+					        		<input type="text" id="telefono" data-tag="Teléfono" data-toggle="tooltip" class="form-control input-sm" onkeypress="return EscribeSoloNumero(event)" tabindex="5"  />
+					        	</div> 
+		  					</div>
+		  					<div class="col-sm-4">
+		  						<div class="form-group">    
+					        		<label for="apellido">Apellidos</label>	        		
+					        		<input class="form-control input-sm" type="text" data-tag="Apellido" data-toggle="tooltip" id="apellido" onkeypress="return soloLetras(event)" tabindex="3"  />
+					      		</div>
+					      		<label id="labelCorreo" for="correo">Correo</label>
+					      		<div class="input-group form-group">
+									<span class="input-group-addon">@</span>
+					        		<input type="email" id="correo" class="form-control input-sm" data-tag="Correo" OnkeyDown="validarcarccorreo(this.value)" list="listCorreo" tabindex="6">
+					        		<datalist id="listCorreo">
+					        			<option value="fulanito@hotmail.com">fulanito@hotmail.com</option>
+					        		</datalist>	
+					      		</div>					      							      	
+		  					</div>  
+			  			</div>
+	  				</fieldset>
+	  				<fieldset>
+	  					<legend class="text-gris">Datos Planilla</legend>
+	  					<div class="row">
+			        		<div class="col-xs-3">
+		        				<input type="text" class="form-control input-sm" data-tag="Usuario" id="userPlanilla" value="" placeholder="Usuario" />
+	        				</div>
+				        	<div class="col-xs-3">
+				        		<input type="text" id="passPlanilla" data-tag="Contraseña" class="form-control input-sm" value="" placeholder="Contraseña" />	
+				        	</div>	
+			  			</div>
+	  				</fieldset>
+	  				<fieldset>
+						<legend class="text-gris">Seguridad Social</legend>
+					
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+		  							<label for="empresaVin">Empresa vínculo</label>
+		  							<select id="empresaVin" class="form-control input-sm" data-tag="empresaVin" tabindex="11">
+		  							</select>
+		  						</div>
+		  						<div class="form-group">
+		  							<label for="arl">ARL</label>
+		  							<select id="arl" class="form-control input-sm" tabindex="12">
+		  								<option value=""></option>
+		  							</select>
+		  						</div>
+		  						<div class="form-group">
+		  							<label for="num-riesgo">Riesgo</label>
+		  							<input type="number" id="num-riesgo" class="form-control input-sm" value="0">
+		  						</div>
+							</div>
+							<div class="col-sm-4">								
+		  						<div class="form-group">
+					        		<label for="eps">EPS</label>
+					    			<select id="eps" class="form-control input-sm" tabindex="13">
+					    				<option value=""></option>
+					    			</select>	
+					      		</div>
+		  						<div class="form-group">
+		  							<label for="arl">AFP</label>
+		  							<select id="afp" class="form-control input-sm" tabindex="14">
+		  								<option value=""></option>
+		  							</select>
+		  						</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+		  							<label for="caja">Caja</label>
+		  							<button type="button" class="btn btn-default btn-sm" id="caja" data-confirm="" tabindex="15">Seleccionar</button>
+		  						</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+
+				<div class="col-sm-4">
+					<fieldset>					
+						<legend class="text-gris">Datos de Entrada</legend>
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="fecha-ingreso">Fecha de ingreso</label>
+			  				 	<div class="input-group form-group">
+								  <span class="input-group-addon" id="buttonCalendario"><span class="glyphicon glyphicon-calendar"></span></span>
+								  <input type="text" id="fecha-ingreso" class="form-control input-sm" data-tag="Fecha de Ingreso" placeholder="DD/MM/AAAA" tabindex="7">
+								</div>	
+								<div class="form-group">
+					        		<label for="empresa">Empresa actual</label>
+					    			<input type="text" id="empresa" data-tag="Empresa" class="form-control input-sm" tabindex="9" />		    		
+					      		</div>	
+							</div>
+
+							<div class="col-sm-6">
+								<label for="salario">Salario</label>
+			      				<div class="input-group form-group">
+								  	<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+									<input type="text" id="salario" onkeyup="format(this)" onchange="format(this)" data-tag="Salario" class="form-control input-sm" list="dtSalario" tabindex="8">
+									<datalist id="dtSalario">
+										<option value="589.500">589.500</option>
+									</datalist>	
+								</div>
+								<label for="cargouOficio">Cargo u oficio</label>
+			      				<div class="input-group form-group">
+								  	<span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>
+									<input type="text" id="cargouOficio" class="form-control input-sm" data-tag="Cargo" list="dtCargo" tabindex="10">
+									<datalist id="dtCargo">
+										<option value="Obrero(a)">Obrero(a)</option>
+										<option value="Cocinero(a)">Cocinero(a)</option>
+										<option value="Mesero(a)">Mesero(a)</option>
+										<option value="Conductor(a)">Conductor(a)</option>
+									</datalist>	
+								</div>
+							</div>				
+						</div>
+					</fieldset>
+					<fieldset>
+	  					<legend class="text-gris">Mensualidad</legend>
+	  					<div class="row">
+							<div class="col-sm-6" class="contentMenCheck">
+								<div class="checkbox">
+									<label>
+										<input type = "checkbox" class="menCheck" id="saludCheckBox" data-valor="20000"  data-press="off"/> Salud ($20.000)
+									</label>
+             					</div>
+             					<div class="checkbox">
+             						<label>
+             							<input type = "checkbox" class="menCheck" id="arlCheckBox" data-valor="30000"  data-press="off"/> Arl ($30.000)
+         							</label>
+             					</div>	
+             					<div class="checkbox">
+             						<label>
+             							<input type = "checkbox" class="menCheck" id="pensionCheckBox" data-valor="20000" data-press="off" /> Pensión ($20.000)
+         							</label>
+             					</div>	
+             					<div class="checkbox">
+             						<label>
+             							<input type = "checkbox" class="menCheck" id="cajaCheckBox" data-valor="21000" data-press="off" />Caja ($21.000)
+         							</label>
+         						</div>	    											
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group has-success">
+					        		<label for="passPlanilla">Valor</label>
+					        		<span class="valorMenSpan">$0</span>
+					    			<input type="text" id="valorMensualidad" data-tag="Contraseña" class="form-control input-sm hidden" value="0" />	
+					      		</div>
+					      		<button type="button" id="knowPrice" class="btn btn-default btn-sm">Precio</button>
+					      		<button type="button" id="digitarMensualidad" class="btn btn-default btn-sm">Digitar</button>
+							</div>
+		  		
+			  			</div>
+	  				</fieldset>
+	  				<fieldset>			  			
+		  				<legend class="text-gris">Detalles</legend>			  					
+			        		<textarea id="detalles" class="form-control" rows="3" cols="40" tabindex="16"></textarea>			      				      		
+	      			</fieldset>
+				</div>
+			</div>
+      		<div class="row text-center">
+	      		<div class="col-ms-12">
+	      			<button type="submit"  class="btn btn-primary" id="registrar" tabindex="17">Registrar</button> 	
+	      		</div>
+           		
+       		</div>
+        </form>
+
+
+	</section>
+</body>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+	<title>Registro de usuarios</title>
+	<link rel="shortcut icon" href="../img/iconos.png">
+	<link rel="stylesheet" href="../main.css">	
+	<link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap.css" >	
+	<link rel="stylesheet" href="../Librerias/bootstrap/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="../Librerias/calendario/css/calendar-blue.css">
+
+	<script src="../Librerias/calendario/js/calendar.js"></script>
+	<script src="../Librerias/calendario/js/calendar-es.js" ></script>
+	<script src="../Librerias/calendario/js/calendar-setup.js" ></script>
+	<script src="../Librerias/jquery/jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="../Librerias/bootstrap/js/bootstrap.js"></script>
+    <script src="script.js"></script>
+    <script src="../Librerias/apprise/apprise-1.5.full.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Sistema de Usuario</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse navbar-ex1-collapse">
+	      <ul class="nav navbar-nav">
+	      	<li><a href="../">Inicio</a></li>
+	      	<li><a href="../lobby">Lobby</a></li>
+	        <li class="active"><a href="">Registro</a></li>
+	        <li><a href="../consulta">Consulta</a></li>
+	        <li><a href="../listar">Listar</a></li>
+	        <li><a href="../gestor">Gestor</a></li>
+			<li><button type="button" class="btn btn-danger navbar-btn" onclick="location.href='../pagos'">Pagos</button></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li id="nameUser"><a href="#">Usuario</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="../cuenta/">Mi cuenta</a></li>
+	            <li id="liMetas"><a href="../metas/">Metas</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li id="logout"><a href="#">Cerra sesión</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </nav>
+	
+	<section class="container label-white">
+		
+		<form id="form-regUsu">
+			<h2 class="text-center text-blue">Registro de usuarios</h2>
+			<div id="containerErrores" class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    	<div id="tContainerErrores"></div>
+		    	<div id="bContainerErrores"></div>
+		    </div>
+  			
+			<div class="row">
+				<div class="col-sm-8">
+					<fieldset>
+		  				<legend class="text-gris">Datos Personales</legend>    
+						
+			  			<div class="row">
+							<div class="col-sm-4">
+
+								<div class="form-group">    
+					        		<label id="labelCedula" for="cedula">Cédula</label>
+				        			<input type="text" class="form-control" data-tag="Cédula" id="cedula" maxlength="12" onkeyup="ValidarCedula(this.value)" onkeypress="return EscribeSoloNumero(event,'mensaje1')" autocomplete= "off" autofocus/>
+				    			</div>				    			
+								<div class="form-group">
+					        		<label for="direccion">Dirección</label>
+					    			<input type="text" id="direccion" data-tag="Direccion" class="form-control" />		    		
+					      		</div>
+							</div>
+		  					<div class="col-sm-4">
+		  						<div class="form-group">    
+					         		<label for="nombre">Nombre</label>	         		
+					         		<input type="text" id="nombre" data-tag="Nombre" data-toggle="tooltip" title="asdasd" class="form-control" onkeypress="return soloLetras(event)" />	         
+					      		</div>
+					      		<div class="form-group">    
+					        		<label for="telefono">Teléfono</label>	        		
+					        		<input type="text" id="telefono" data-tag="Teléfono" data-toggle="tooltip" class="form-control" onkeypress="return EscribeSoloNumero(event)"  />
+					        	</div> 
+		  					</div>
+		  					<div class="col-sm-4">
+		  						<div class="form-group">    
+					        		<label for="apellido">Apellidos</label>	        		
+					        		<input class="form-control" type="text" data-tag="Apellido" data-toggle="tooltip" id="apellido" onkeypress="return soloLetras(event)"  />
+					      		</div>
+					      		<label id="labelCorreo" for="correo">Correo</label>
+					      		<div class="input-group form-group">
+									<span class="input-group-addon">@</span>
+					        		<input type="email" id="correo" class="form-control" data-tag="Correo" OnkeyDown="validarcarccorreo(this.value)" list="listCorreo">
+					        		<datalist id="listCorreo">
+					        			<option value="fulanito@hotmail.com">fulanito@hotmail.com</option>
+					        		</datalist>	
+					      		</div>					      							      	
+		  					</div>  
+		  					<div class="col-sm-3">
+		  						
+		  					</div>
+
+			  			</div>
+	  				</fieldset>
+				</div>
+
+				<div class="col-sm-4">
+					<fieldset>					
+						<legend class="text-gris">Datos de Entrada</legend>
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="fecha-ingreso">Fecha de ingreso</label>
+			  				 	<div class="input-group form-group">
+								  <span class="input-group-addon" id="buttonCalendario"><span class="glyphicon glyphicon-calendar"></span></span>
+								  <input type="text" id="fecha-ingreso" class="form-control" data-tag="Fecha de Ingreso" placeholder="DD/MM/AAAA">
+								</div>	
+								<div class="form-group">
+					        		<label for="empresa">Empresa actual</label>
+					    			<input type="text" id="empresa" data-tag="Empresa" class="form-control" />		    		
+					      		</div>	
+							</div>
+
+							<div class="col-sm-6">
+								<label for="salario">Salario</label>
+			      				<div class="input-group form-group">
+								  	<span class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></span>
+									<input type="text" id="salario" onkeyup="format(this)" onchange="format(this)" data-tag="Salario" class="form-control" list="dtSalario">
+									<datalist id="dtSalario">
+										<option value="589.500">589.500</option>
+									</datalist>	
+								</div>
+								<label for="cargouOficio">Cargo u oficio</label>
+			      				<div class="input-group form-group">
+								  	<span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>
+									<input type="text" id="cargouOficio" class="form-control" data-tag="Cargo" list="dtCargo">
+									<datalist id="dtCargo">
+										<option value="Obrero(a)">Obrero(a)</option>
+										<option value="Cocinero(a)">Cocinero(a)</option>
+										<option value="Mesero(a)">Mesero(a)</option>
+										<option value="Conductor(a)">Conductor(a)</option>
+									</datalist>	
+								</div>
+							</div>				
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-8">
+					<fieldset>
+						<legend class="text-gris">Seguridad Social</legend>
+					
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+		  							<label for="empresaVin">Empresa vínculo</label>
+		  							<select id="empresaVin" class="form-control">
+		  							</select>
+		  						</div>
+		  						<div class="form-group">
+					        		<label for="eps">EPS</label>
+					    			<select id="eps" class="form-control">
+					    				<option value=""></option>
+					    			</select>	
+					      		</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+		  							<label for="arl">ARL</label>
+		  							<select id="arl" class="form-control">
+		  								<option value=""></option>
+		  							</select>
+		  						</div>
+		  						<div class="form-group">
+		  							<label for="arl">AFP</label>
+		  							<select id="afp" class="form-control">
+		  								<option value=""></option>
+		  							</select>
+		  						</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+		  							<label for="caja">Caja</label>
+		  							<button type="button" class="btn btn-default" id="caja" data-confirm="">Seleccionar</button>
+		  						</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="col-sm-4">
+					<fieldset>			  			
+		  				<legend class="text-gris">Detalles</legend>			  					
+			        		<textarea id="detalles" class="form-control" rows="3" cols="40"></textarea>			      				      		
+	      			</fieldset>
+				</div>
+			</div>
+      		<div class="row text-center">
+	      		<div class="col-ms-12">
+	      			<button type="submit"  class="btn btn-primary" id="registrar">Registrar</button> 	
+	      		</div>
+           		
+       		</div>
+        </form>
+
+
+	</section>
+
+</body>
+>>>>>>> 7666d55568f96ceff9e9b2fcb279a904e05a85a0
+</html>

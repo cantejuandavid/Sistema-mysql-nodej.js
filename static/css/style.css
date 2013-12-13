@@ -1,0 +1,56 @@
+.appriseOverlay{position:fixed;top:0;left:0;background:rgba(0,0,0,0.3);display:none}
+.appriseOuter{margin-top:120px;background:#eee;border:1px solid #fff;-ms-box-shadow:0 3px 7px #333;-moz-box-shadow:0 3px 7px #333;-o-box-shadow:0 3px 7px #333;-webkit-box-shadow:0 3px 7px #333;box-shadow:0 3px 7px #333;-ms-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;position:absolute;z-index:99999999;min-width:200px;min-height:50px;max-width:75%;position:fixed;display:none;text-align:center;font:normal normal 14px arial}
+.appriseInner{padding:20px;color:#333;text-shadow:0 1px 0 #fff}
+.appriseInner button{border:1px solid #bbb;-ms-border-radius:3px;-moz-border-radius:3px;-o-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background:-moz-linear-gradient(100% 100% 90deg,#eee,#d5d5d5);background:-webkit-gradient(linear,0% 0%,0% 100%,from(#eee),to(#d5d5d5));background:-webkit-linear-gradient(#eee,#d5d5d5);background:-o-linear-gradient(#eee,#d5d5d5);color:#232d3d;font-size:14px;font-weight:bold;padding:9px 15px;margin:0 3px;text-shadow:0 1px 0 #fff;cursor:pointer;-ms-box-shadow:0 1px 2px #ccc;-moz-box-shadow:0 1px 2px #ccc;-o-box-shadow:0 1px 2px #ccc;-webkit-box-shadow:0 1px 2px #ccc;box-shadow:0 1px 2px #ccc}
+.appriseInner button hover{color:#d85054}
+.aButtons,.aInput{margin:20px 10px 0 10px;text-align:center}
+.aTextbox{border:1px solid #aaa;-ms-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;-ms-box-shadow:0 1px 0 #fff;-moz-box-shadow:0 1px 0 #fff;-o-box-shadow:0 1px 0 #fff;-webkit-box-shadow:0 1px 0 #fff;box-shadow:0 1px 0 #fff;width:180px;font-size:12px;font-weight:bold;padding:5px 10px}
+.avatar-s{vertical-align:top;margin:0 5px 0 0;width:20px}
+body{background-color:#6a6363;padding-top:65px;margin:0;overflow-x:hidden;overflow-y:scroll}
+.centralLogin{background:#b3b3b3;min-height:20px;padding:19px;margin-bottom:20px;background-color:#f5f5f5;border:1px solid #e3e3e3;-ms-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}
+.centralLogin .welcomeUser{display:none;text-align:center;}
+.centralLogin .welcomeUser .avatar{margin-bottom:10px;width:100px}
+.centralLogin .form-reg{display:none;}
+.centralLogin .form-reg fieldset .load{display:none}
+.thumbImg{width:20px;display:inline-block;vertical-align:top;margin-right:3px}
+.form-login .load{display:none;margin:0 auto;width:30px;z-index:9999999}
+.centralApp{background:#777;border:1px solid #4b4b4b}
+.divPrincEmpresa{background:#fff;border-left:5px solid #6cb4e8;cursor:pointer;-ms-box-shadow:0 0 6px rgba(0,0,0,0.3);-moz-box-shadow:0 0 6px rgba(0,0,0,0.3);-o-box-shadow:0 0 6px rgba(0,0,0,0.3);-webkit-box-shadow:0 0 6px rgba(0,0,0,0.3);box-shadow:0 0 6px rgba(0,0,0,0.3);padding:10px;margin-bottom:5px;-ms-border-radius:0 7px 7px 0;-moz-border-radius:0 7px 7px 0;-o-border-radius:0 7px 7px 0;-webkit-border-radius:0 7px 7px 0;border-radius:0 7px 7px 0;}
+.divPrincEmpresahover{background:#e5e5e5;border-left-color:#ffa500}
+.crearEmpresa{background:#fff;border:1px solid #e7e7e7;-ms-border-radius:5px;-moz-border-radius:5px;-o-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:30px;}
+.crearEmpresa fieldset{margin-bottom:10px}
+.wrapSucesos{-ms-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;-o-border-radius:10px 0 0 10px;-webkit-border-radius:10px 0 0 10px;border-radius:10px 0 0 10px;height:300px;overflow-y:scroll;overflow-x:hidden;border:3px solid #4e4e4e;-ms-box-shadow:0 0 18px rgba(102,175,233,0.8);-moz-box-shadow:0 0 18px rgba(102,175,233,0.8);-o-box-shadow:0 0 18px rgba(102,175,233,0.8);-webkit-box-shadow:0 0 18px rgba(102,175,233,0.8);box-shadow:0 0 18px rgba(102,175,233,0.8);}
+.wrapSucesos .lineSuceso{color:#d4d4d4;border-bottom:1px solid #666;padding:5px 5px 0 10px;text-align:left;width:100%}
+.wrapSucesos .selectEmp{background-color:#7d7d7d !important}
+.tableListUsers{background:#fff;margin:0 auto !important;font-size:12px;float:none !important;}
+.tableListUsers td,.tableListUsers th{padding:3px}
+.containerErroresReg{display:none}
+.campoErrorReg{border:1px solid rgba(253,0,0,0.5);-ms-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;-ms-box-shadow:0 0 5px rgba(253,0,0,0.2);-moz-box-shadow:0 0 5px rgba(253,0,0,0.2);-o-box-shadow:0 0 5px rgba(253,0,0,0.2);-webkit-box-shadow:0 0 5px rgba(253,0,0,0.2);box-shadow:0 0 5px rgba(253,0,0,0.2);color:#555;resize:none;-ms-transition:.3s ease-in-out all;-moz-transition:.3s ease-in-out all;-o-transition:.3s ease-in-out all;-webkit-transition:.3s ease-in-out all;transition:.3s ease-in-out all}
+.text-bigg{font-size:40px;color:#44cbd2;font-weight:bold}
+.tableSuccessReg{background:#fff;text-align:center}
+.loadConsulta{position:absolute;margin:10% 0 0 42%;display:none;width:60px;height:60px;z-index:9999999}
+.labelEstado{color:#ff5c17;font:normal normal 12px arial,sans-serif;display:inline-block;line-height:12px;text-align:left}
+.checkEstado{display:none}
+.checkEstado + label{background:#fff;display:inline-block;width:16px;height:16px;background:url("../consulta/img/check_02.png") 0 0 no-repeat;text-indent:-1000em;cursor:pointer}
+.checkEstadochecked + label{background:url("../consulta/img/check_02.png") 0 -16px no-repeat}
+ul.listaRegistros{padding:0;list-style:none;}
+ul.listaRegistros li{background:#969696;color:#fff;display:block;font:normal normal 14px arial,sans-serif;list-style:none;line-height:14px;margin:2px;padding:3px;text-align:left}
+ul.listaImagenes{padding:0;list-style:none;}
+ul.listaImagenes li{background:#969696;color:#fff;display:block;font:normal normal 14px arial,sans-serif;list-style:none;line-height:14px;margin:2px;padding:3px;text-align:left}
+.tableClassUsu{background:#fff !important;margin:0 auto !important;float:none !important;}
+.tableClassUsu td,.tableClassUsu th{word-wrap:break-word}
+.tableClassUsu td:nth-child(2){width:120px}
+.tableClassUsu td:nth-child(3){width:150px}
+.tableClassUsu td:nth-child(4){width:200px}
+.containerTableSS{padding:15px}
+.captionTableListar{color:#636363}
+ul.UserAndPasstoggle{cursor:pointer;list-style:none;padding:0;text-align:left;}
+ul.UserAndPasstoggle li{font-size:12px;display:none;padding:2px;text-align:left;}
+ul.UserAndPasstoggle li i{color:#2c71a9}
+div.msjPop{background:rgba(0,182,0,0.9);-ms-box-shadow:0 3px 2px rgba(0,0,0,0.2);-moz-box-shadow:0 3px 2px rgba(0,0,0,0.2);-o-box-shadow:0 3px 2px rgba(0,0,0,0.2);-webkit-box-shadow:0 3px 2px rgba(0,0,0,0.2);box-shadow:0 3px 2px rgba(0,0,0,0.2);color:#fff;font-weight:bold;padding:10px;position:absolute;top:50px;right:-100%}
+.contentMenCheck div{display:block}
+.valorMenSpan{display:block;padding:4px;font:normal bold 24px arial;color:#4a7e2c}
+.infoEmpBloq{background:transparent;border:1px solid transparent;border-bottom-color:#f8f8f8;outline:none;color:#636363}
+.infoEmpEdit{background:#fff}
+.buttonEditarInfoEmp{position:absolute;right:0;bottom:0;border:1px solid transparent;border-top-color:#d2d2d2;border-left-color:#d2d2d2;outline:none;-ms-border-radius:0;-moz-border-radius:0;-o-border-radius:0;-webkit-border-radius:0;border-radius:0}
+.contenInfoEmp{position:relative}

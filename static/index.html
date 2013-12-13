@@ -1,0 +1,200 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesion | Asospagos de Colombia S.A.S Aplicación</title>
+  <link rel="shortcut icon" href="img/iconos.png">
+  <link rel="stylesheet" href="Librerias/bootstrap/css/bootstrap.css" >
+  <link rel="stylesheet" href="Librerias/bootstrap/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="Librerias/jquery/jquery.js"></script>
+  <script src="Librerias/bootstrap/js/bootstrap.js"></script>
+  <script src="script.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script></script>
+</head>
+<body>
+
+  <div class="container">
+    <div>
+      <div class="col-sm-4 col-md-offset-4 centralLogin">
+
+        
+        <div id="welcomeUser" class="welcomeUser">
+          <h3>Bienvenido</h3>
+          <img src='' id="avatar" class='avatar'>
+          <div class="row text-center">
+            <button type='button' class='btn btn-primary' onclick='funEnter()'>Entrar</button>
+            <button type='button' class='btn btn-danger' onclick='funLogout()'>Cerrar</button>  
+          </div>
+        </div>
+
+        <form id="form-login" accept-charset="UTF-8" class="form-login">
+          <legend id="status-title">Login</legend> 
+          
+          <fieldset>
+            <div class="form-group">
+              <label for="usuarioLogin">Usuario</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" id="usuarioLogin" class="form-control" name="username" placeholder="Usuario" autofocus>
+              </div>                
+            </div>
+            <div class="form-group">
+              <label for="ctaLogin">Contraseña</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" id="ctaLogin" class="form-control" name="password" placeholder="Contraseña"></div>        
+              </div>                            
+          </fieldset>
+          <div id="alert-login" class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">×</a><span></span></div>
+          <img src="img/generated-image.gif" class="load" alt="dasdsd" id="loadLogin">
+          <button type="submit" data-loading-text="Loading..." class="btn btn-primary btn-block">Ingresar</button>
+          <button type="button" id="showRegistro" name="submit" data-loading-text="Loading..." class="btn btn-default btn-block" style="display:none;">Registrar</button>
+        </form>
+
+        <form id="form-reg" accept-charset="UTF-8" class="form-reg">
+          <legend id="status-title">Registro</legend>
+            <fieldset>
+              <div class="form-group">
+                <label for="usuario">Usuario</label>  
+                <input type="text" class="form-control" id="usuario" placeholder="usuario" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="cta">Contraseña</label>
+                <input type="password" id="cta" class="form-control" placeholder="contraseña">
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre</label>  
+                <input type="text" class="form-control" id="nombre" placeholder="nombre">
+              </div>
+              <div class="form-group">
+                <label for="cedula">Cédula</label>  
+                <input type="text" class="form-control" id="cedula" placeholder="cédula" data-toggle="tooltip" onkeypress="return EscribeSoloNumero(event)"  />
+              </div>
+              <div class="form-group">
+                <label for="tipo">Tipo de empleado</label>
+                <select id="tipo" class="form-control">
+                  <option value="empleado">Empleado</option>
+                  <option value="empleada">Empleada</option>
+                  <option value="jefe">Jefe</option>
+                </select>
+              </div>
+              <img src="img/generated-image.gif" class="load" alt="dasdsd" id="loadReg">
+              <div id="alert-reg" class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">×</a><span></span></div>
+              <button type="submit" name="submit" data-loading-text="Loading..." class="btn btn-primary btn-large btn-block" style="display:none;">Registrar</button>
+              <button type="button" id="showLogin" data-loading-text="Loading..." class="btn btn-default btn-large btn-block">Login</button>
+        </form>        
+
+      </div>
+    </div>
+    
+  </div>
+
+</body>
+=======
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesion</title>
+  <link rel="shortcut icon" href="img/iconos.png">
+  <link rel="stylesheet" href="Librerias/bootstrap/css/bootstrap.css" >
+  <link rel="stylesheet" href="Librerias/bootstrap/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="main.css">
+
+  <script src="Librerias/jquery/jquery.js"></script>
+  <script src="Librerias/bootstrap/js/bootstrap.js"></script>
+  <script src="script.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script></script>
+</head>
+<body>
+
+  <div class="container theme-showcase">
+    <div>
+      <div class="col-sm-6 col-md-offset-3 well text-muted" style="background: #333333">
+
+        <!-- Dialogo de bienvenida -->
+        <div id="welcomeSiempre" class="welcomeSiempre">
+          <h3>Bienvenido</h3>
+          <img src='' id="avatar" class='avatar img-thumbnail'>
+          <div class="row text-center">
+            <button type='button' class='btn btn-primary btn-lg' onclick='funEnter()'>Entrar</button>
+            <button type='button' class='btn btn-danger btn-lg' onclick='funLogout()'>Cerrar</button>  
+          </div>
+        </div>
+        <!--  FIN Dialogo de bienvenida -->
+
+        <!--  Formulario de login empleado -->
+        <form id="form-login" accept-charset="UTF-8">
+          <legend id="status-title"><h1 style="color:white">Login</h1></legend> 
+          <div id="alert-login" class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">×</a><span></span></div>
+          <fieldset>
+            <div class="form-group">
+              <label for="usuarioLogin">Usuario</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" id="usuarioLogin" class="form-control" name="username" placeholder="Usuario" autofocus>
+              </div>                
+            </div>
+            <div class="form-group">
+              <label for="ctaLogin">Contraseña</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" id="ctaLogin" class="form-control" name="password" placeholder="Contraseña"></div>        
+              </div>                            
+          </fieldset>
+          <img src="img/generated-image.gif" class="load" alt="dasdsd" id="loadLogin">
+          <button type="submit" data-loading-text="Loading..." class="btn btn-primary btn-lg btn-block">Ingresar</button>
+          <button type="button" id="showRegistro" name="submit" data-loading-text="Loading..." class="btn btn-default btn-lg btn-block">Registrar</button>
+        </form>
+        <!--  FIN Formulario de login empleado -->  
+        
+        <!--  Formulario de registro empleado -->
+        <form id="form-reg" accept-charset="UTF-8">
+          <legend id="status-title"><h1 style="color:white">Registro</h1></legend>
+          <div id="alert-reg" class="alert alert-danger"><a class="close" data-dismiss="alert" href="#">×</a><span></span></div>
+            <fieldset>
+              <div class="form-group">
+                <label for="usuario">Usuario</label>  
+                <input type="text" class="form-control" id="usuario" placeholder="usuario" autofocus>
+              </div>
+              <div class="form-group">
+                <label for="cta">Contraseña</label>
+                <input type="password" id="cta" class="form-control" placeholder="contraseña">
+              </div>
+              <div class="form-group">
+                <label for="nombre">Nombre</label>  
+                <input type="text" class="form-control" id="nombre" placeholder="nombre">
+              </div>
+              <div class="form-group">
+                <label for="cedula">Cédula</label>  
+                <input type="text" class="form-control" id="cedula" placeholder="cédula" data-toggle="tooltip" onkeypress="return EscribeSoloNumero(event)"  />
+              </div>
+              <div class="form-group">
+                <label for="tipo">Tipo de empleado</label>
+                <select id="tipo" class="form-control">
+                  <option value="empleado">Empleado</option>
+                  <option value="empleada">Empleada</option>
+                  <option value="jefe">Jefe</option>
+                </select>
+              </div>
+              <img src="img/generated-image.gif" class="load" alt="dasdsd" id="loadReg">
+              <button type="submit" name="submit" data-loading-text="Loading..." class="btn btn-primary btn-large btn-block">Registrar</button>
+              <button type="button" id="showLogin" data-loading-text="Loading..." class="btn btn-default btn-large btn-block">Login</button>
+        </form>
+        <!--  FIN Formulario de registro empleado -->
+
+      </div>
+    </div>
+    
+  </div>
+
+</body>
+>>>>>>> 7666d55568f96ceff9e9b2fcb279a904e05a85a0
+</html>
